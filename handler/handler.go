@@ -39,24 +39,22 @@ func HandleRequest(c echo.Context) error {
 }
 
 type Response struct {
-	Results struct{
-		Shop []Shop `json:"shop"`
+	Results struct {
+		Shop []struct {
+			Id          string `json:"id"`
+			Name        string `json:"name"`
+			LogoImage   string `json:"logo_image"`
+			NameKana    string `json:"name_kana"`
+			StationName string `json:"station_name"`
+			Access      string `json:"access"`
+			Address     string `json:"address"`
+			Urls        struct {
+				Pc string `json:"pc"`
+			} `json:"urls"`
+			Genre struct {
+				Name  string `json:"name"`
+				Catch string `json:"catch"`
+			} `json:"genre"`
+		} `json:"shop"`
 	} `json:"results"`
-}
-
-type Shop struct {
-	Id string `json:"id"`
-	Name string `json:"name"`
-	LogoImage string `json:"logo_image"`
-	NameKana string `json:"name_kana"`
-	StationName string `json:"station_name"`
-	Access string `json:"access"`
-	Address string `json:"address"`
-	Urls struct{
-		Pc string `json:"pc"`
-	} `json:"urls"`
-	Genre struct{
-		Name string `json:"name"`
-		Catch string `json:"catch"`
-	} `json:"genre"`
 }
