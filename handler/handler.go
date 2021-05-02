@@ -14,7 +14,6 @@ func HandleRequest(c echo.Context) error {
 	lat := c.QueryParam("lat")
 	lng := c.QueryParam("lng")
 	apiKey := cfg.Section("api").Key("key").String()
-	fmt.Println(apiKey)
 	url := fmt.Sprintf("http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=%v&lat=%v&lng=%v&range=3&order=4&format=json&keyword=ラーメン",
 		apiKey, lat, lng)
 	resp, err := http.Get(url)
@@ -35,7 +34,11 @@ func HandleRequest(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, response)
+	if len(response.Results.Shop) <= 0 {
+		return c.JSON(http.StatusOK, "近くにお店がないよ")
+	}
+
+	return c.JSON(http.StatusOK, response.Results)
 }
 
 type Response struct {
