@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/labstack/echo"
+	"gopkg.in/ini.v1"
 	"io/ioutil"
 	"net/http"
-	"gopkg.in/ini.v1"
 )
 
-func HandleRequest(c echo.Context) error {
+func GetShops(c echo.Context) (*Response, error) {
 	cfg, _ := ini.Load("config.ini")
 	lat := c.QueryParam("lat")
 	lng := c.QueryParam("lng")
@@ -18,27 +18,23 @@ func HandleRequest(c echo.Context) error {
 		apiKey, lat, lng)
 	resp, err := http.Get(url)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	var response Response
 	err = json.Unmarshal(body, &response)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	if len(response.Results.Shop) <= 0 {
-		return c.JSON(http.StatusOK, "近くにお店がないよ")
-	}
-
-	return c.JSON(http.StatusOK, response.Results)
+	return &response, nil
 }
 
 type Response struct {
