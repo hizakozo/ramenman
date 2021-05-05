@@ -1,9 +1,4 @@
 config.env
+Handler
+Handler.zip
 /.idea/
-
-&{POST / HTTP/1.1 1 1 map[
-Accept-Encoding:[gzip] Content-Length:[441] Content-Type:[application/json;
-charset=utf-8] User-Agent:[LineBotWebhook/2.0] X-Forwarded-For:[147.92.150.195] X-Forwarded-Proto:[https]
- X-Line-Signature:[XnJfSNe9nEPzVF2+t+eq3HY4MWbl5xuKLu9wEP0aMOY=]
- ] 0xc00005a100 <nil>
- 441 [] false 567fecaf5c9a.ngrok.io map[] map[] <nil> map[] [::1]:57930 / <nil> <nil> <nil> 0xc00005a140}
