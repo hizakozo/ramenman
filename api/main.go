@@ -31,7 +31,6 @@ func HandleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProx
 	var webhook Webhook
 	if err := json.Unmarshal([]byte(request.Body), &webhook); err != nil {
 		log.Print(err)
-		// クライアントのエラーを返す
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusBadRequest,
 			Body:       fmt.Sprintf(`{"message":"%s"}`+"\n", http.StatusText(http.StatusBadRequest)),
