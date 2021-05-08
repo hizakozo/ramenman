@@ -1,18 +1,15 @@
 package main
 
 import (
-	"github.com/aws/aws-lambda-go/events"
-	"os"
-)
-
-import (
 	"encoding/json"
 	"fmt"
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/line/line-bot-sdk-go/v7/linebot"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 type Webhook struct {
