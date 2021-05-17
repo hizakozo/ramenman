@@ -17,7 +17,7 @@ type Webhook struct {
 	Events      []*linebot.Event `json:"events"`
 }
 
-func HandleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	bot, err := linebot.New(
 		os.Getenv("secret"),
 		os.Getenv("token"),
@@ -115,5 +115,5 @@ func getShops(lat, lng float64) (*string, error) {
 }
 
 func main() {
-	lambda.Start(HandleRequest)
+	lambda.Start(Handler)
 }
